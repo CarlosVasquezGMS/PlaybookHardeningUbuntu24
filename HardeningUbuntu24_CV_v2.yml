@@ -1,0 +1,1779 @@
+id: 2b058dac-7d1a-494a-870b-1693ada0e638
+version: 3
+vcShouldKeepItemLegacyProdMachine: false
+name: HardeningUbuntu24_CV v2
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 040cdbbb-11c3-48fb-8cc0-430cd29dc230
+    type: start
+    task:
+      id: 040cdbbb-11c3-48fb-8cc0-430cd29dc230
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "54"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 470,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "2":
+    id: "2"
+    taskid: e33d99c6-24e1-4484-8917-dbd76d2cc3af
+    type: title
+    task:
+      id: e33d99c6-24e1-4484-8917-dbd76d2cc3af
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 5610
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "4":
+    id: "4"
+    taskid: 4dec03da-76fc-45bd-b657-2374337127f3
+    type: condition
+    task:
+      id: 4dec03da-76fc-45bd-b657-2374337127f3
+      version: -1
+      name: Ansible Master is Conected?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "58"
+      "yes":
+      - "8"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: Linux.Ping.[0]
+            iscontext: true
+          right:
+            value:
+              simple: pong
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 470,
+          "y": 540
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: 2542b375-ee09-41af-a2f3-df29e357ac90
+    type: regular
+    task:
+      id: 2542b375-ee09-41af-a2f3-df29e357ac90
+      version: -1
+      name: linux-ping master
+      description: |-
+        Try to connect to host, verify a usable python and return C(pong) on success
+         Further documentation available at https://docs.ansible.com/ansible/2.9/modules/ping_module.html
+      script: AnsibleLinux_copy_pkill|||linux-ping
+      type: regular
+      iscommand: true
+      brand: AnsibleLinux_copy_pkill
+    nexttasks:
+      '#none#':
+      - "4"
+    scriptarguments:
+      host:
+        simple: ${inputs.EngineIP}
+      using:
+        complex:
+          root: modules
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: modules.brand
+                iscontext: true
+              right:
+                value:
+                  simple: AnsibleLinux_copy_pkill
+          - - operator: containsString
+              left:
+                value:
+                  simple: modules.name
+                iscontext: true
+              right:
+                value:
+                  simple: inputs.TenantName
+                iscontext: true
+          accessor: name
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 470,
+          "y": 370
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: 780efa5c-9ac6-451e-aa07-295cd41a8a7a
+    type: regular
+    task:
+      id: 780efa5c-9ac6-451e-aa07-295cd41a8a7a
+      version: -1
+      name: Set close reason
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "59"
+    scriptarguments:
+      key:
+        simple: CloseReason
+      value:
+        simple: Problema en la ejecución del playbook
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1380
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: 1a9048c5-21c9-4e9b-bb84-ea58f326aedc
+    type: regular
+    task:
+      id: 1a9048c5-21c9-4e9b-bb84-ea58f326aedc
+      version: -1
+      name: closeInvestigation
+      description: Close the current incident
+      script: Builtin|||closeInvestigation
+      type: regular
+      iscommand: true
+      brand: Builtin
+    nexttasks:
+      '#none#':
+      - "2"
+    scriptarguments:
+      closeReason:
+        simple: ${CloseReason}
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 5440
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 959268e3-17e8-4062-9c77-5ffe18bdb04a
+    type: regular
+    task:
+      id: 959268e3-17e8-4062-9c77-5ffe18bdb04a
+      version: -1
+      name: linux-ping slave
+      script: AnsibleLinux_copy_pkill|||linux-shell
+      type: regular
+      iscommand: true
+      brand: AnsibleLinux_copy_pkill
+    nexttasks:
+      '#none#':
+      - "10"
+    scriptarguments:
+      cmd:
+        simple: ansible -m ping ${inputs.RemoteHostname}
+      host:
+        simple: ${inputs.EngineIP}
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 582.5,
+          "y": 710
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "10":
+    id: "10"
+    taskid: 3667efdb-903c-49df-ad49-0f3a635b4dda
+    type: condition
+    task:
+      id: 3667efdb-903c-49df-ad49-0f3a635b4dda
+      version: -1
+      name: Ansible Master is Conected?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "58"
+      "yes":
+      - "11"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: Linux.Shell.ping
+            iscontext: true
+          right:
+            value:
+              simple: pong
+      - - operator: isEqualString
+          left:
+            value:
+              simple: Linux.Shell.status
+            iscontext: true
+          right:
+            value:
+              simple: SUCCESS
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 582.5,
+          "y": 880
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "11":
+    id: "11"
+    taskid: 6d032187-a0d8-4909-876f-ca61d6bbf69b
+    type: condition
+    task:
+      id: 6d032187-a0d8-4909-876f-ca61d6bbf69b
+      version: -1
+      name: Check if Nessus is Enabled
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "58"
+      "yes":
+      - "55"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              complex:
+                root: modules
+                filters:
+                - - operator: isEqualString
+                    left:
+                      value:
+                        simple: modules.brand
+                      iscontext: true
+                    right:
+                      value:
+                        simple: Nessus
+                - - operator: isEqualString
+                    left:
+                      value:
+                        simple: modules.state
+                      iscontext: true
+                    right:
+                      value:
+                        simple: active
+                accessor: brand
+            iscontext: true
+      - - operator: containsString
+          left:
+            value:
+              complex:
+                root: modules
+                filters:
+                - - operator: containsString
+                    left:
+                      value:
+                        simple: modules.brand
+                      iscontext: true
+                    right:
+                      value:
+                        simple: Nessus
+                accessor: name
+            iscontext: true
+          right:
+            value:
+              simple: inputs.TenantName
+            iscontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 787.5,
+          "y": 1050
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "12":
+    id: "12"
+    taskid: 50a86e8e-7c35-4a03-a6a4-338be075827d
+    type: regular
+    task:
+      id: 50a86e8e-7c35-4a03-a6a4-338be075827d
+      version: -1
+      name: Get list scans
+      description: Returns the scan list
+      script: Nessus|||nessus-list-scans
+      type: regular
+      iscommand: true
+      brand: Nessus
+    nexttasks:
+      '#none#':
+      - "25"
+      - "30"
+    scriptarguments:
+      extend-context:
+        simple: NessusScanSummary=NessusScan.[]
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 1380
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "19":
+    id: "19"
+    taskid: aba1e73e-0537-46e0-aaa6-0b1b54e30f11
+    type: regular
+    task:
+      id: aba1e73e-0537-46e0-aaa6-0b1b54e30f11
+      version: -1
+      name: Get History ID scan pre playbook
+      description: Returns details for the given scan.
+      script: Nessus|||nessus-scan-details
+      type: regular
+      iscommand: true
+      brand: Nessus
+    nexttasks:
+      '#none#':
+      - "20"
+    scriptarguments:
+      historyId:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].History.[].Status
+                iscontext: true
+              right:
+                value:
+                  simple: completed
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24
+          accessor: History.[].ID
+          transformers:
+          - operator: LastArrayElement
+      scanId:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24
+          accessor: ID
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 1720
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "20":
+    id: "20"
+    taskid: 2adeb1ec-2f93-4073-b1b2-f9451f1e380e
+    type: regular
+    task:
+      id: 2adeb1ec-2f93-4073-b1b2-f9451f1e380e
+      version: -1
+      name: Set History ID scan pre playbook
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "24"
+    scriptarguments:
+      key:
+        simple: HistoryID_scan_pre
+      value:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].History.[].Status
+                iscontext: true
+              right:
+                value:
+                  simple: completed
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24
+          accessor: History.[].ID
+          transformers:
+          - operator: LastArrayElement
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 1890
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "22":
+    id: "22"
+    taskid: 55bb7a57-6e03-414e-b057-fcdf12124c8d
+    type: regular
+    task:
+      id: 55bb7a57-6e03-414e-b057-fcdf12124c8d
+      version: -1
+      name: Get History ID scan post playbook
+      description: Returns details for the given scan.
+      script: Nessus|||nessus-scan-details
+      type: regular
+      iscommand: true
+      brand: Nessus
+    nexttasks:
+      '#none#':
+      - "23"
+    scriptarguments:
+      extend-context:
+        simple: Id_PostPlaybook=NessusScan.ID
+      historyId:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].History.[].Status
+                iscontext: true
+              right:
+                value:
+                  simple: completed
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24_PostPlaybook
+          accessor: History.[].ID
+          transformers:
+          - operator: LastArrayElement
+      scanId:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24_PostPlaybook
+          accessor: ID
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 4430
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "23":
+    id: "23"
+    taskid: 32b3fd8c-e27a-40aa-8155-ae7f428a94d6
+    type: regular
+    task:
+      id: 32b3fd8c-e27a-40aa-8155-ae7f428a94d6
+      version: -1
+      name: Set History ID scan post playbook
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "27"
+    scriptarguments:
+      key:
+        simple: HistoryID_scan_post
+      value:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].History.[].Status
+                iscontext: true
+              right:
+                value:
+                  simple: completed
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24_PostPlaybook
+          accessor: History.[].ID
+          transformers:
+          - operator: LastArrayElement
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 4600
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "24":
+    id: "24"
+    taskid: 4c40e7b9-ff7d-49c4-b4f0-eaaed7adbcca
+    type: regular
+    task:
+      id: 4c40e7b9-ff7d-49c4-b4f0-eaaed7adbcca
+      version: -1
+      name: nessus-scan-details pre playbook
+      description: Returns details for the given scan.
+      script: Nessus|||nessus-scan-details
+      type: regular
+      iscommand: true
+      brand: Nessus
+    nexttasks:
+      '#none#':
+      - "50"
+    scriptarguments:
+      historyId:
+        simple: ${HistoryID_scan_pre}
+      scanId:
+        simple: ${ID_scan_pre}
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 2060
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "25":
+    id: "25"
+    taskid: 3cd5840f-80e7-455a-b381-dac738746634
+    type: regular
+    task:
+      id: 3cd5840f-80e7-455a-b381-dac738746634
+      version: -1
+      name: Set Scan ID pre playbook
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "19"
+    scriptarguments:
+      key:
+        simple: ID_scan_pre
+      value:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24
+          accessor: ID
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 1550
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "26":
+    id: "26"
+    taskid: 9351b888-4b8f-4613-9fe4-ee51bad11beb
+    type: regular
+    task:
+      id: 9351b888-4b8f-4613-9fe4-ee51bad11beb
+      version: -1
+      name: Set Scan ID post playbook
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "22"
+    scriptarguments:
+      key:
+        simple: ID_scan_post
+      value:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24_PostPlaybook
+          accessor: ID
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 4260
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "27":
+    id: "27"
+    taskid: 04859b6d-78de-44df-b519-f60452514d6d
+    type: regular
+    task:
+      id: 04859b6d-78de-44df-b519-f60452514d6d
+      version: -1
+      name: nessus-scan-details post playbook
+      description: Returns details for the given scan.
+      script: Nessus|||nessus-scan-details
+      type: regular
+      iscommand: true
+      brand: Nessus
+    nexttasks:
+      '#none#':
+      - "57"
+    scriptarguments:
+      historyId:
+        simple: ${HistoryID_scan_post}
+      scanId:
+        simple: ${ID_scan_post}
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 4770
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "29":
+    id: "29"
+    taskid: e909461b-2636-4c17-963f-f2c445e9de59
+    type: regular
+    task:
+      id: e909461b-2636-4c17-963f-f2c445e9de59
+      version: -1
+      name: send-mail
+      description: Send an email
+      script: mail-sender|||send-mail
+      type: regular
+      iscommand: true
+      brand: mail-sender
+    nexttasks:
+      '#none#':
+      - "42"
+    scriptarguments:
+      htmlBody:
+        simple: "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n
+          \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n
+          \   <title>Correo</title>\n    <style>\n        body {\n\t\t\tfont-family:
+          'Verdana', serif;\n\t\t\tmargin: 0;\n\t\t\tpadding: 0;\n\t\t\tcolor: #333;\n\t\t\tline-height:
+          1.5;\n\t\t\tfont-size: 16px;\n\t\t}\n        .header {\n            background-color:
+          #0070c0;\n\t\t\tpadding: 10px;\n            text-align: right;\n            color:
+          #fff;\n        }\n        .header img {\n            height: 50px;\n            vertical-align:
+          middle;\n        }\n\t\t.container {\n\t\t\tpadding: 2em;\n\t\t\tbackground-color:
+          #ffffff;\n\t\t\tbox-shadow: 0 0 15px rgba(0, 0, 0, 0.2);\n\t\t\tborder-radius:
+          8px;\n\t\t}\n\t\t.container table {\n\t\t\twidth: 100%;\n\t\t\tborder-collapse:
+          separate;\n\t\t\tborder-spacing: 0;\n\t\t\tbackground-color: #f2f2f2;\n\t\t\tborder:
+          2px double #ffffff;\n\t\t\tborder-radius: 8px;\n\t\t\toverflow: hidden;\n\t\t\tbox-shadow:
+          0 0 10px rgba(0, 0, 0, 0.1);\n\t\t}\n\t\t@media (max-width: 768px) {\n\t\t\t.container
+          {\n\t\t\t\tpadding: 1em;\n\t\t\t}\n\t\t\t.logo {\n\t\t\t\theight: 15%;\n\t\t\t}\n\t\t}\n\t\t@media
+          (max-width: 480px) {\n\t\t\t.container {\n\t\t\t\tpadding: 0.5em;\n\t\t\t}\n\t\t\t.logo
+          {\n\t\t\t\theight: 10%;\n\t\t\t}\n\t\t}\n\t\t.container table {\n\t\t\tdisplay:
+          block;\n\t\t\toverflow-x: auto;\n\t\t}\n\t\t.container th, .container td
+          {\n\t\t\tpadding: 12px;\n\t\t\ttext-align: left;\n\t\t\tborder: 1px solid
+          #ffffff;\n\t\t}\n\t\t.container th {\n\t\t\tbackground-color: #e9ecef;\n\t\t\tcolor:
+          #333;\n\t\t\tfont-weight: bold;\n\t\t\ttext-transform: uppercase;\n\t\t}\n\t\t.container
+          td {\n\t\t\tbackground-color: #f9f9f9;\n\t\t}\n    </style>\n</head>\n<body>\n
+          \   <div class=\"header\">\n        <a href=\"https://sc.gmsseguridad.com/login.aspx\">\n
+          \           <img src=\"https://conferenciagms.com/wp-content/uploads/2023/08/Sin-titulo-1.png\"
+          alt=\"Logo\">\n        </a>\n    </div>\n    <div class=\"container\">\n
+          \       <p>Estimados,</p>\n        <p>El motivo del presente es para notificar
+          que el playbook de hardening en el host <strong>${Linux.Shell.pos_play_info.host}
+          </strong> se ejecutó de manera satisfactoria.</p>\n        <p style=\"text-align:center;\"><span
+          style=\"font-size:22px;\"><strong>Informe de Atención.</strong></p>\n        <table>\n
+          \           <thead>\n                <tr>\n                    <th style=\"text-align:
+          center;\">HOST</th>\n                    <th style=\"text-align: center;\">IP</th>\n
+          \                   <th style=\"text-align: center;\">SISTEMA OPERATIVO</th>\n
+          \               </tr>\n            </thead>\n            <tbody>\n                <tr>\n
+          \                   <td style=\"text-align: center;\">${Linux.Shell.pos_play_info.host}</td>\n
+          \                   <td style=\"text-align: center;\">${inputs.RemoteIP}</td>\n
+          \                   <td style=\"text-align: center;\">Ubuntu 24.04</td>\n
+          \               </tr>\n                <tr>\n                    <td colspan=\"3\"
+          class=\"description-cell\" style=\"text-align: center;\">Descripción</td>\n
+          \                </tr>\n                <tr class=\"incident\">\n                    <td>Escaneo
+          Pre Playbook</td>\n\t\t\t\t\t<td colspan=\"2\">\n                    \t<p
+          style=\"text-align: justify;\">Se realizó el escaneo de vulnerabilidades
+          mediante la guía de cumplimiento Cis Benchmark el ${Time_scan_pre}, obteniendo
+          las siguientes estadísticas:</p>\n                    \t<p><strong>Name
+          Scan:</strong> Ubuntu24</p>\n                    \t<p><strong>Date Scan:</strong>
+          ${Time_scan_pre}</p>\n\t\t\t\t\t\t<p><strong>Compliance Checks:</strong>
+          252</p>\n\t\t\t\t\t\t<p><strong>Passed:</strong> ${NessusScan.[0].Endpoint.[1].Low}</p>\n\t\t\t\t\t\t<p><strong>Failded:</strong>
+          ${NessusScan.[0].Endpoint.[1].Critical}</p>\n\t\t\t\t\t\t<p><strong>Warning:</strong>
+          ${NessusScan.[0].Endpoint.[1].Medium}</p>\n\t\t\t\t\t\t\n\t\t\t\t\t</td>\n
+          \               </tr>\n                \n                <tr class=\"analysis\">\n
+          \                   <td>Ejecución playbook Ansible </td>\n                    <td
+          colspan=\"2\">\n                        <hr>\n\t\t\t\t\t\t<p>Se procedió
+          a ejecutar el hardening en el host, obtenindo las siguientes estadísticas
+          en las tareas ejecutadas:\n\t\t\t\t\t\t<p><strong>Host:</strong> ${Linux.Shell.pos_play_info.host}</p>\n\t\t\t\t\t
+          \   <p><strong>Date finish:</strong> ${TimeNow}</p>\n\t\t\t\t\t\t<p><strong>Changed:</strong>
+          ${Linux.Shell.pos_play_info.changed}</p>\n\t\t\t\t\t\t<p><strong>Failed:</strong>
+          ${Linux.Shell.pos_play_info.failed}</p>\n\t\t\t\t\t\t<p><strong>Ignored:</strong>
+          ${Linux.Shell.pos_play_info.ignored}</p>\n\t\t\t\t\t\t<p><strong>Ok:</strong>
+          ${Linux.Shell.pos_play_info.ok}</p>\n\t\t\t\t\t\t<p><strong>Rescued:</strong>
+          ${Linux.Shell.pos_play_info.rescued}</p>\n\t\t\t\t\t\t<p><strong>Skipped:</strong>
+          ${Linux.Shell.pos_play_info.skipped}</p>\n\t\t\t\t\t\t<p><strong>Unreachable:</strong>
+          ${Linux.Shell.pos_play_info.unreachable}</p>\n\t\t\t\t\t\t\n\t\t\t\t\t</td>\n
+          \               </tr>\n                \n                <tr class=\"remediation\">\n
+          \                   \n                    <td>Escaneo Post Playbook</td>\n
+          \                   \n                    <td colspan=\"2\">\n                        <hr>\n
+          \                       <p><strong>Name Scan:</strong> Ubuntu24_PostPlaybook</p>\n
+          \                       <p><strong>Date Scan:</strong> ${Time_scan_post}</p>\n\t\t\t\t\t\t<p><strong>Compliance
+          Checks:</strong> 252</p>\n\t\t\t\t\t\t<p><strong>Passed:</strong> ${NessusScan.[1].Endpoint.[1].Low}</p>\n\t\t\t\t\t\t<p><strong>Failded:</strong>
+          ${NessusScan.[1].Endpoint.[1].Critical}</p>\n\t\t\t\t\t\t<p><strong>Warning:</strong>
+          ${NessusScan.[1].Endpoint.[1].Medium}</p>\n\t\n\t\t\t\t\t</td>\n                </tr>\n
+          \           \n            </tbody>\n        </table>\n        <div class=\"footer\">\n
+          \           <p>Saludos Cordiales,</p>\n        </div>\n    </div>\n</body>\n</html>"
+      subject:
+        simple: GMSSOC - Reporte de Hardening en Host ${inputs.RemoteHostname} - ${inputs.RemoteIP}
+      to:
+        simple: carlos.vasquez@gmsseguridad.com
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 5100
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "30":
+    id: "30"
+    taskid: fc7095c9-68e9-47ef-b18a-5a682ec7fef8
+    type: regular
+    task:
+      id: fc7095c9-68e9-47ef-b18a-5a682ec7fef8
+      version: -1
+      name: Set Scan Time pre playbook
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "19"
+    scriptarguments:
+      key:
+        simple: Time_scan_pre
+      value:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24
+          accessor: LastModificationDate
+          transformers:
+          - operator: TimeStampToDate
+          - operator: ModifyDateTime
+            args:
+              variation:
+                value:
+                  simple: 5 hour ago
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 920,
+          "y": 1550
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "31":
+    id: "31"
+    taskid: d3f23811-5807-4c5a-8888-008b3bbf899b
+    type: regular
+    task:
+      id: d3f23811-5807-4c5a-8888-008b3bbf899b
+      version: -1
+      name: Set Scan Time post playbook
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "33"
+    scriptarguments:
+      key:
+        simple: Time_scan_post
+      value:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24_PostPlaybook
+          accessor: LastModificationDate
+          transformers:
+          - operator: TimeStampToDate
+          - operator: ModifyDateTime
+            args:
+              variation:
+                value:
+                  simple: 5 hour ago
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 2900
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "33":
+    id: "33"
+    taskid: 4cbbeb85-a22f-489c-a039-2a2be57c224b
+    type: condition
+    task:
+      id: 4cbbeb85-a22f-489c-a039-2a2be57c224b
+      version: -1
+      name: Scan Post Finished?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "35"
+      "yes":
+      - "26"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: AfterRelativeDate
+          left:
+            value:
+              simple: Time_scan_post
+            iscontext: true
+          right:
+            value:
+              simple: ${Time_scan_pre}
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 3070
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "34":
+    id: "34"
+    taskid: 571761f9-c469-4fb6-b055-10c31be91910
+    type: regular
+    task:
+      id: 571761f9-c469-4fb6-b055-10c31be91910
+      version: -1
+      name: Sleep 10 min
+      description: Sleep for X seconds.
+      scriptName: Sleep
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "56"
+    scriptarguments:
+      seconds:
+        simple: "600"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 2570
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "35":
+    id: "35"
+    taskid: 80a05602-ff31-4918-8de1-daabf5831705
+    type: regular
+    task:
+      id: 80a05602-ff31-4918-8de1-daabf5831705
+      version: -1
+      name: Sleep 10 min
+      description: Sleep for X seconds.
+      scriptName: Sleep
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "41"
+    scriptarguments:
+      seconds:
+        simple: "600"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 500,
+          "y": 3240
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "36":
+    id: "36"
+    taskid: 693b1373-91b4-4a67-88d1-b3225b96c27d
+    type: condition
+    task:
+      id: 693b1373-91b4-4a67-88d1-b3225b96c27d
+      version: -1
+      name: Scan Post Finished?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "37"
+      "yes":
+      - "26"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: AfterRelativeDate
+          left:
+            value:
+              complex:
+                root: Time_scan_post
+                transformers:
+                - operator: LastArrayElement
+            iscontext: true
+          right:
+            value:
+              simple: ${Time_scan_pre}
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 500,
+          "y": 3750
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "37":
+    id: "37"
+    taskid: d042f909-9e99-4055-8f42-59b3d2c5b49a
+    type: regular
+    task:
+      id: d042f909-9e99-4055-8f42-59b3d2c5b49a
+      version: -1
+      name: PrintErrorEntry
+      description: Prints an error entry with a given message.
+      scriptName: PrintErrorEntry
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "38"
+    scriptarguments:
+      message:
+        simple: Error Scan Post Playbook
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 3920
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "38":
+    id: "38"
+    taskid: a155e308-7b9c-447b-aea2-8f2cc52bf837
+    type: regular
+    task:
+      id: a155e308-7b9c-447b-aea2-8f2cc52bf837
+      version: -1
+      name: Fix Manual
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "26"
+    separatecontext: false
+    defaultassigneecomplex:
+      simple: especialistasiem.soc@gmsseguridad.com
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 4090
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "39":
+    id: "39"
+    taskid: 16d4225f-ab73-4a5e-be14-1ba8e2229b7c
+    type: regular
+    task:
+      id: 16d4225f-ab73-4a5e-be14-1ba8e2229b7c
+      version: -1
+      name: GetTime
+      description: |
+        Retrieves the current date and time.
+      scriptName: GetTime
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "34"
+    scriptarguments:
+      dateFormat:
+        simple: ISO
+      daysAgo:
+        simple: "5"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 2400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "40":
+    id: "40"
+    taskid: 52d2fd12-1804-4cdf-a63c-45f56a76923e
+    type: regular
+    task:
+      id: 52d2fd12-1804-4cdf-a63c-45f56a76923e
+      version: -1
+      name: Set Scan Time post playbook
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "36"
+    scriptarguments:
+      append:
+        simple: "false"
+      key:
+        simple: Time_scan_post
+      value:
+        complex:
+          root: NessusScan.[]
+          filters:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: NessusScan.[].Name
+                iscontext: true
+              right:
+                value:
+                  simple: Ubuntu24_PostPlaybook
+          accessor: LastModificationDate
+          transformers:
+          - operator: TimeStampToDate
+          - operator: ModifyDateTime
+            args:
+              variation:
+                value:
+                  simple: 5 hour ago
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 500,
+          "y": 3580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "41":
+    id: "41"
+    taskid: 1981b935-b68e-4431-8f53-fee3d4fe3dc0
+    type: regular
+    task:
+      id: 1981b935-b68e-4431-8f53-fee3d4fe3dc0
+      version: -1
+      name: Get list scans
+      description: Returns the scan list
+      script: Nessus|||nessus-list-scans
+      type: regular
+      iscommand: true
+      brand: Nessus
+    nexttasks:
+      '#none#':
+      - "40"
+    scriptarguments:
+      extend-context:
+        simple: NessusScanSummary=NessusScan.[]
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 500,
+          "y": 3410
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "42":
+    id: "42"
+    taskid: 454fac29-3798-4f0f-b40e-ecf733adfa5b
+    type: regular
+    task:
+      id: 454fac29-3798-4f0f-b40e-ecf733adfa5b
+      version: -1
+      name: Set close reason
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "7"
+    scriptarguments:
+      key:
+        simple: CloseReason
+      value:
+        simple: Playbook ejecutado con exito.
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 5270
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "50":
+    id: "50"
+    taskid: b8cc2a9d-3a89-4a60-be36-5cd687603740
+    type: regular
+    task:
+      id: b8cc2a9d-3a89-4a60-be36-5cd687603740
+      version: -1
+      name: Hardening CIS
+      script: AnsibleLinux_copy_pkill|||linux-shell
+      type: regular
+      iscommand: true
+      brand: AnsibleLinux_copy_pkill
+    nexttasks:
+      '#none#':
+      - "39"
+    scriptarguments:
+      cmd:
+        simple: ansible-playbook ${inputs.PlaybookPath} -e servidor=${inputs.RemoteHostname}
+      execution-timeout:
+        simple: "1200"
+      extend-context:
+        simple: changed1=Linux.Shell.[].pos_play_info.changed
+      host:
+        simple: ${inputs.EngineIP}
+      retry-count:
+        simple: "1"
+      retry-interval:
+        simple: "3"
+      using:
+        simple: AnsibleLinux GMS
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 2230
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "54":
+    id: "54"
+    taskid: ba8aaf99-2deb-4a80-a183-835f9cb8c2cf
+    type: title
+    task:
+      id: ba8aaf99-2deb-4a80-a183-835f9cb8c2cf
+      version: -1
+      name: Integration Validations
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "5"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 470,
+          "y": 210
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "55":
+    id: "55"
+    taskid: d587745a-0efa-4c53-99d1-633c04b122c5
+    type: title
+    task:
+      id: d587745a-0efa-4c53-99d1-633c04b122c5
+      version: -1
+      name: Data Pre Playbook
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "12"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 1220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "56":
+    id: "56"
+    taskid: bf2b7b47-052f-4ad0-b405-fde9fa47f177
+    type: title
+    task:
+      id: bf2b7b47-052f-4ad0-b405-fde9fa47f177
+      version: -1
+      name: Data Post Playbook
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "31"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 797.5,
+          "y": 2740
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "57":
+    id: "57"
+    taskid: a05f8590-b5de-437f-9d73-a87983a394e4
+    type: title
+    task:
+      id: a05f8590-b5de-437f-9d73-a87983a394e4
+      version: -1
+      name: Report and Close Incident
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "29"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 4940
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "58":
+    id: "58"
+    taskid: e4e9011b-0cf0-4ffc-b2e3-32feba8a6b9e
+    type: title
+    task:
+      id: e4e9011b-0cf0-4ffc-b2e3-32feba8a6b9e
+      version: -1
+      name: Close Incident
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "6"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "59":
+    id: "59"
+    taskid: cb9b8355-80b6-446d-8f4b-e48090be7ef3
+    type: regular
+    task:
+      id: cb9b8355-80b6-446d-8f4b-e48090be7ef3
+      version: -1
+      name: closeInvestigation
+      description: Close the current incident
+      script: Builtin|||closeInvestigation
+      type: regular
+      iscommand: true
+      brand: Builtin
+    nexttasks:
+      '#none#':
+      - "2"
+    scriptarguments:
+      closeReason:
+        simple: ${CloseReason}
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1550
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 5620,
+        "width": 1250,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs:
+- key: EngineHostname
+  value:
+    simple: engine-soar
+  required: true
+  description: ""
+  playbookInputQuery: null
+- key: EngineIP
+  value:
+    simple: 10.0.1.6
+  required: true
+  description: ""
+  playbookInputQuery: null
+- key: RemoteHostname
+  value:
+    simple: ubuntu24
+  required: true
+  description: ""
+  playbookInputQuery: null
+- key: RemoteIP
+  value:
+    simple: 10.0.1.9
+  required: true
+  description: ""
+  playbookInputQuery: null
+- key: PlaybookPath
+  value:
+    simple: /home/sysadmin/ansible/playbooks/hardening_ubuntu24.yml
+  required: true
+  description: ""
+  playbookInputQuery: null
+- key: Tags
+  value: {}
+  required: false
+  description: ""
+  playbookInputQuery: null
+- key: TenantName
+  value:
+    simple: GMS
+  required: true
+  description: ""
+  playbookInputQuery: null
+inputSections:
+- inputs:
+  - EngineHostname
+  - EngineIP
+  - RemoteHostname
+  - RemoteIP
+  - PlaybookPath
+  - Tags
+  - TenantName
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs: []
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs: []
+sourceplaybookid: 2f5f68c7-8d69-4e4d-887d-bdc403c9293c
+dirtyInputs: true
