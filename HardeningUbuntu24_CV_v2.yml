@@ -1,5 +1,5 @@
 id: 2b058dac-7d1a-494a-870b-1693ada0e638
-version: 3
+version: 5
 vcShouldKeepItemLegacyProdMachine: false
 name: HardeningUbuntu24_CV v2
 starttaskid: "0"
@@ -22,7 +22,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 470,
+          "x": 265,
           "y": 50
         }
       }
@@ -49,8 +49,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 377.5,
-          "y": 5610
+          "x": 265,
+          "y": 1010
         }
       }
     note: false
@@ -93,7 +93,7 @@ tasks:
       {
         "position": {
           "x": 470,
-          "y": 540
+          "y": 210
         }
       }
     note: false
@@ -152,7 +152,7 @@ tasks:
       {
         "position": {
           "x": 470,
-          "y": 370
+          "y": 210
         }
       }
     note: false
@@ -189,7 +189,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1380
+          "y": 1220
         }
       }
     note: false
@@ -224,7 +224,7 @@ tasks:
       {
         "position": {
           "x": 705,
-          "y": 5440
+          "y": 4940
         }
       }
     note: false
@@ -259,8 +259,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 582.5,
-          "y": 710
+          "x": 470,
+          "y": 210
         }
       }
     note: false
@@ -310,8 +310,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 582.5,
-          "y": 880
+          "x": 470,
+          "y": 210
         }
       }
     note: false
@@ -389,8 +389,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 787.5,
-          "y": 1050
+          "x": 470,
+          "y": 210
         }
       }
     note: false
@@ -426,7 +426,7 @@ tasks:
       {
         "position": {
           "x": 797.5,
-          "y": 1380
+          "y": 1220
         }
       }
     note: false
@@ -495,7 +495,7 @@ tasks:
       {
         "position": {
           "x": 797.5,
-          "y": 1720
+          "y": 1220
         }
       }
     note: false
@@ -553,7 +553,7 @@ tasks:
       {
         "position": {
           "x": 797.5,
-          "y": 1890
+          "y": 1220
         }
       }
     note: false
@@ -623,8 +623,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 705,
-          "y": 4430
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -681,8 +681,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 705,
-          "y": 4600
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -707,7 +707,7 @@ tasks:
       brand: Nessus
     nexttasks:
       '#none#':
-      - "50"
+      - "60"
     scriptarguments:
       historyId:
         simple: ${HistoryID_scan_pre}
@@ -719,7 +719,7 @@ tasks:
       {
         "position": {
           "x": 797.5,
-          "y": 2060
+          "y": 1220
         }
       }
     note: false
@@ -766,8 +766,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 490,
-          "y": 1550
+          "x": 797.5,
+          "y": 1220
         }
       }
     note: false
@@ -814,8 +814,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 705,
-          "y": 4260
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -851,8 +851,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 705,
-          "y": 4770
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -960,7 +960,7 @@ tasks:
       {
         "position": {
           "x": 705,
-          "y": 5100
+          "y": 4940
         }
       }
     note: false
@@ -1014,8 +1014,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 920,
-          "y": 1550
+          "x": 797.5,
+          "y": 1220
         }
       }
     note: false
@@ -1070,7 +1070,7 @@ tasks:
       {
         "position": {
           "x": 797.5,
-          "y": 2900
+          "y": 2740
         }
       }
     note: false
@@ -1113,7 +1113,7 @@ tasks:
       {
         "position": {
           "x": 797.5,
-          "y": 3070
+          "y": 2740
         }
       }
     note: false
@@ -1147,8 +1147,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 797.5,
-          "y": 2570
+          "x": 50,
+          "y": 530
         }
       }
     note: false
@@ -1182,8 +1182,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 500,
-          "y": 3240
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -1228,8 +1228,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 500,
-          "y": 3750
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -1263,8 +1263,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 387.5,
-          "y": 3920
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -1295,8 +1295,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 387.5,
-          "y": 4090
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -1333,8 +1333,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 797.5,
-          "y": 2400
+          "x": 50,
+          "y": 530
         }
       }
     note: false
@@ -1390,8 +1390,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 500,
-          "y": 3580
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -1425,8 +1425,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 500,
-          "y": 3410
+          "x": 797.5,
+          "y": 2740
         }
       }
     note: false
@@ -1463,7 +1463,7 @@ tasks:
       {
         "position": {
           "x": 705,
-          "y": 5270
+          "y": 4940
         }
       }
     note: false
@@ -1509,8 +1509,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 797.5,
-          "y": 2230
+          "x": 50,
+          "y": 530
         }
       }
     note: false
@@ -1539,7 +1539,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 470,
+          "x": 265,
           "y": 210
         }
       }
@@ -1569,8 +1569,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 797.5,
-          "y": 1220
+          "x": 50,
+          "y": 370
         }
       }
     note: false
@@ -1599,8 +1599,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 797.5,
-          "y": 2740
+          "x": 50,
+          "y": 690
         }
       }
     note: false
@@ -1629,8 +1629,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 705,
-          "y": 4940
+          "x": 50,
+          "y": 850
         }
       }
     note: false
@@ -1659,8 +1659,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 1220
+          "x": 480,
+          "y": 850
         }
       }
     note: false
@@ -1695,7 +1695,37 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1550
+          "y": 1220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "60":
+    id: "60"
+    taskid: 19998aa0-4033-4012-bda1-5bf0be4cfb29
+    type: title
+    task:
+      id: 19998aa0-4033-4012-bda1-5bf0be4cfb29
+      version: -1
+      name: Playbook Hardening Ansible
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "50"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 530
         }
       }
     note: false
@@ -1710,8 +1740,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 5620,
-        "width": 1250,
+        "height": 4960,
+        "width": 1127.5,
         "x": 50,
         "y": 50
       }
@@ -1777,3 +1807,215 @@ outputSections:
 outputs: []
 sourceplaybookid: 2f5f68c7-8d69-4e4d-887d-bdc403c9293c
 dirtyInputs: true
+collapsedTasks:
+  "54": |-
+    {
+      "children": {
+        "10": {
+          "type": "condition",
+          "x": 582.5,
+          "y": 880
+        },
+        "11": {
+          "type": "condition",
+          "x": 787.5,
+          "y": 1050
+        },
+        "4": {
+          "type": "condition",
+          "x": 470,
+          "y": 540
+        },
+        "5": {
+          "type": "regular",
+          "x": 470,
+          "y": 370
+        },
+        "55": false,
+        "58": false,
+        "8": {
+          "type": "regular",
+          "x": 582.5,
+          "y": 710
+        }
+      },
+      "nextTasks": [
+        "58",
+        "55"
+      ]
+    }
+  "55": |-
+    {
+      "children": {
+        "12": {
+          "type": "regular",
+          "x": 797.5,
+          "y": 1380
+        },
+        "19": {
+          "type": "regular",
+          "x": 797.5,
+          "y": 1720
+        },
+        "20": {
+          "type": "regular",
+          "x": 797.5,
+          "y": 1890
+        },
+        "24": {
+          "type": "regular",
+          "x": 797.5,
+          "y": 2000
+        },
+        "25": {
+          "type": "regular",
+          "x": 490,
+          "y": 1550
+        },
+        "30": {
+          "type": "regular",
+          "x": 920,
+          "y": 1550
+        },
+        "60": false
+      },
+      "nextTasks": [
+        "60"
+      ]
+    }
+  "56": |-
+    {
+      "children": {
+        "22": {
+          "type": "regular",
+          "x": 705,
+          "y": 4430
+        },
+        "23": {
+          "type": "regular",
+          "x": 705,
+          "y": 4600
+        },
+        "26": {
+          "type": "regular",
+          "x": 705,
+          "y": 4260
+        },
+        "27": {
+          "type": "regular",
+          "x": 705,
+          "y": 4770
+        },
+        "31": {
+          "type": "regular",
+          "x": 797.5,
+          "y": 2900
+        },
+        "33": {
+          "type": "condition",
+          "x": 797.5,
+          "y": 3070
+        },
+        "35": {
+          "type": "regular",
+          "x": 500,
+          "y": 3240
+        },
+        "36": {
+          "type": "condition",
+          "x": 500,
+          "y": 3750
+        },
+        "37": {
+          "type": "regular",
+          "x": 387.5,
+          "y": 3920
+        },
+        "38": {
+          "type": "regular",
+          "x": 387.5,
+          "y": 4090
+        },
+        "40": {
+          "type": "regular",
+          "x": 500,
+          "y": 3580
+        },
+        "41": {
+          "type": "regular",
+          "x": 500,
+          "y": 3410
+        },
+        "57": false
+      },
+      "nextTasks": [
+        "57"
+      ]
+    }
+  "57": |-
+    {
+      "children": {
+        "2": false,
+        "29": {
+          "type": "regular",
+          "x": 705,
+          "y": 5100
+        },
+        "42": {
+          "type": "regular",
+          "x": 705,
+          "y": 5270
+        },
+        "7": {
+          "type": "regular",
+          "x": 705,
+          "y": 5440
+        }
+      },
+      "nextTasks": [
+        "2"
+      ]
+    }
+  "58": |-
+    {
+      "children": {
+        "2": false,
+        "59": {
+          "type": "regular",
+          "x": 50,
+          "y": 1550
+        },
+        "6": {
+          "type": "regular",
+          "x": 50,
+          "y": 1380
+        }
+      },
+      "nextTasks": [
+        "2"
+      ]
+    }
+  "60": |-
+    {
+      "children": {
+        "34": {
+          "type": "regular",
+          "x": 50,
+          "y": 1030
+        },
+        "39": {
+          "type": "regular",
+          "x": 50,
+          "y": 860
+        },
+        "50": {
+          "type": "regular",
+          "x": 50,
+          "y": 690
+        },
+        "56": false
+      },
+      "nextTasks": [
+        "56"
+      ]
+    }
